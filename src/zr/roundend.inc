@@ -260,7 +260,7 @@ public Action:RoundEndTimer(Handle:timer)
 bool:RoundEndGetRoundStatus(&RoundEndOutcome:outcome)
 {
     // If zombie hasn't spawned, then stop.
-    if (!InfectHasZombieSpawned())
+    if (!g_bZombieSpawned)
     {
         // Round isn't over.
         return false;

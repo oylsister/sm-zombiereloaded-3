@@ -31,7 +31,7 @@
      */
     #define DMG_CSS_FALL        (DMG_FALL)      // Client was damaged by falling.
     #define DMG_CSS_BLAST       (DMG_BLAST)     // Client was damaged by explosion.
-    #define DMG_CSS_BURN        (DMG_DIRECT)    // Client was damaged by fire.
+    #define DMG_CSS_BURN        (DMG_BURN)    // Client was damaged by fire.
     #define DMG_CSS_BULLET      (DMG_NEVERGIB)  // Client was shot or knifed.
     #define DMG_CSS_HEADSHOT    (1 << 30)       // Client was shot in the head.
     /**
@@ -231,8 +231,6 @@ public ZRTools_Action:DamageTraceAttack(client, inflictor, attacker, Float:damag
     }
     
     // If damage hitgroups cvar is disabled, then allow damage.
-    // TODO: There are two cvars: zr_hitgroups and zr_damage_hitgroups. Maybe
-    //       just use zr_hitgroups?
     new bool:damagehitgroups = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_HITGROUPS]);
     if (!damagehitgroups)
     {
@@ -376,6 +374,31 @@ public ZRTools_Action:DamageOnTakeDamage(client, inflictor, attacker, Float:dama
         // Stop damage.
         return ACTION_HANDLED;
     }
+	// Client was damaged by fire.
+    else if (damagetype & DMG_CSS_BURN)
+    {
+        // If fire damage is blocked, then stop.
+        new bool:damageblockfire = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_BLOCK_FIRE]);
+        if (!damageblockfire)
+        {
+            return ACTION_CONTINUE;
+        }
+        
+        // If attacker isn't valid, then allow damage.
+        if (!ZRIsClientValid(attacker))
+        {
+            return ACTION_CONTINUE;
+        }
+        
+        // If client is a zombie, then allow damage.
+        if (InfectIsClientInfected(client))
+        {
+            return ACTION_CONTINUE;
+        }
+        
+        // Stop damage.
+        return ACTION_HANDLED;
+    }
     // Client was damaged by falling.
     else if (damagetype & DMG_CSS_FALL)
     {
@@ -413,7 +436,7 @@ public Action:DamageSuicideIntercept(client, argc)
     // match, block it.
     
     // Check general criterias.
-    if ((suicideAfterInfect && !InfectHasZombieSpawned()) || // Check if it should block suicides before mother zombie.
+    if ((suicideAfterInfect && !g_bZombieSpawned) ||    // Check if it should block suicides before mother zombie.
         !ZRIsClientValid(client) ||                     // Validate client (to stop console).
         !IsPlayerAlive(client))                         // Check if dead.
     {

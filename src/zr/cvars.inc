@@ -83,6 +83,7 @@ enum CvarsList
     Handle:CVAR_DAMAGE_HITGROUPS,
     Handle:CVAR_DAMAGE_BLOCK_FF,
     Handle:CVAR_DAMAGE_BLOCK_BLAST,
+	Handle:CVAR_DAMAGE_BLOCK_FIRE,
     Handle:CVAR_DAMAGE_SUICIDE_ZOMBIE,
     Handle:CVAR_DAMAGE_SUICIDE_MZOMBIE,
     Handle:CVAR_DAMAGE_SUICIDE_HUMAN,
@@ -173,6 +174,15 @@ enum CvarsList
     Handle:CVAR_ZSPAWN_TIMELIMIT,
     Handle:CVAR_ZSPAWN_TIMELIMIT_TIME,
     Handle:CVAR_ZSPAWN_TIMELIMIT_ZOMBIE,
+    Handle:CVAR_ZTELE_ZOMBIE,
+    Handle:CVAR_ZTELE_HUMAN_BEFORE,
+    Handle:CVAR_ZTELE_HUMAN_AFTER,
+    Handle:CVAR_ZTELE_DELAY_ZOMBIE,
+    Handle:CVAR_ZTELE_DELAY_HUMAN,
+    Handle:CVAR_ZTELE_MAX_ZOMBIE,
+    Handle:CVAR_ZTELE_MAX_HUMAN,
+    Handle:CVAR_ZTELE_AUTOCANCEL,
+    Handle:CVAR_ZTELE_AUTOCANCEL_DISTANCE,
     Handle:CVAR_ZHP,
     Handle:CVAR_ZHP_DEFAULT,
 }
@@ -347,6 +357,7 @@ CvarsCreate()
     // Block Damage Types
     g_hCvarsList[CVAR_DAMAGE_BLOCK_FF]                  =    CreateConVar("zr_damage_block_ff",         "1",                            "Block friendly fire.");
     g_hCvarsList[CVAR_DAMAGE_BLOCK_BLAST]               =    CreateConVar("zr_damage_block_blast",      "1",                            "Block blast damage inflicted on self or teammates.");
+    g_hCvarsList[CVAR_DAMAGE_BLOCK_FIRE]               	=    CreateConVar("zr_damage_block_fire",      	"1",                            "Block fire damage inflicted on self or teammates.");
     
     // Suicide Intercept
     g_hCvarsList[CVAR_DAMAGE_SUICIDE_ZOMBIE]            =    CreateConVar("zr_damage_suicide_zombie",   "0",                                    "Intercept suicide commands attempted by zombies.");
@@ -454,7 +465,7 @@ CvarsCreate()
     g_hCvarsList[CVAR_RESPAWN]                          =    CreateConVar("zr_respawn",                     "0",    "Respawn players after death. [Recommended: (Enable) zr_zspawn*]");
     g_hCvarsList[CVAR_RESPAWN_DELAY]                    =    CreateConVar("zr_respawn_delay",               "1",    "Time after death to delay player respawn. [Dependency: zr_respawn]");
     g_hCvarsList[CVAR_RESPAWN_TEAM_ZOMBIE]              =    CreateConVar("zr_respawn_team_zombie",         "1",    "Respawn player as a zombie. [Dependency: zr_respawn]");
-    g_hCvarsList[CVAR_RESPAWN_TEAM_ZOMBIE_WORLD]        =    CreateConVar("zr_respawn_team_zombie_world",   "1",    "Respawn player as a zombie if player was a zombie and killed by world damage. [Override: zr_respawn_team_zombie]");
+    g_hCvarsList[CVAR_RESPAWN_TEAM_ZOMBIE_WORLD]        =    CreateConVar("zr_respawn_team_zombie_world",   "1",    "Respawn player as a zombie if player was killed by the world. [Override: zr_respawn_team_zombie]");
     
     
     // ===========================
@@ -495,12 +506,25 @@ CvarsCreate()
     
     
     // ===========================
+    // ZTele (module)
+    // ===========================
+    g_hCvarsList[CVAR_ZTELE_ZOMBIE]                     =    CreateConVar("zr_ztele_zombie",                "1",    "Allow zombies to use ZTele.");
+    g_hCvarsList[CVAR_ZTELE_HUMAN_BEFORE]               =    CreateConVar("zr_ztele_human_before",          "1",    "Allow humans to use ZTele before the mother zombie has spawned.");
+    g_hCvarsList[CVAR_ZTELE_HUMAN_AFTER]                =    CreateConVar("zr_ztele_human_after",           "1",    "Allow humans to use ZTele after the mother zombie has spawned.");
+    g_hCvarsList[CVAR_ZTELE_DELAY_ZOMBIE]               =    CreateConVar("zr_ztele_delay_zombie",          "3.0",  "Time between using ZTele command and teleportation for zombies. [Dependency: zr_ztele_zombie]");
+    g_hCvarsList[CVAR_ZTELE_DELAY_HUMAN]                =    CreateConVar("zr_ztele_delay_human",           "3.0",  "Time between using ZTele command and teleportation for humans. [Dependency: zr_ztele_human_(before)/(after)]");
+    g_hCvarsList[CVAR_ZTELE_MAX_ZOMBIE]                 =    CreateConVar("zr_ztele_max_zombie",            "3",    "Max number of times a zombie is allowed to use ZTele per round. [Dependency: zr_ztele_zombie]");
+    g_hCvarsList[CVAR_ZTELE_MAX_HUMAN]                  =    CreateConVar("zr_ztele_max_human",             "1",    "Max number of times a human is allowed to use ZTele per round. [Dependency: zr_ztele_human_(before)/(after)]");
+    g_hCvarsList[CVAR_ZTELE_AUTOCANCEL]                 =    CreateConVar("zr_ztele_autocancel",            "1",    "Automatically cancel ZTele if player moves out of a set boundary. [Dependency: zr_ztele_(zombie)/(human)[_(before)/(after)]]");
+    g_hCvarsList[CVAR_ZTELE_AUTOCANCEL_DISTANCE]        =    CreateConVar("zr_ztele_autocancel_distance",   "20",   "Maximum distance, in feet, player is allowed to travel before teleport is cancelled. [Dependency: zr_ztele_autocancel]");
+    
+    
+    // ===========================
     // ZHP (module)
     // ===========================
     g_hCvarsList[CVAR_ZHP]                              =    CreateConVar("zr_zhp",             "1",    "Allow player to toggle real HP display as a zombie.");
     g_hCvarsList[CVAR_ZHP_DEFAULT]                      =    CreateConVar("zr_zhp_default",     "1",    "Default ZHP toggle state set on connecting player. [Dependency: zr_zhp]");
     
-    ZTele_OnCvarsCreate();
     
     // Auto-generate config file if it doesn't exist, then execute.
     AutoExecConfig(true, "zombiereloaded", "sourcemod/zombiereloaded");

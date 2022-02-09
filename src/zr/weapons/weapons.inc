@@ -39,7 +39,7 @@
  * @section CS:S start weapons.
  */
 #define WEAPONS_SPAWN_T_WEAPON "weapon_glock"
-#define WEAPONS_SPAWN_CT_WEAPON "weapon_usp"
+#define WEAPONS_SPAWN_CT_WEAPON "weapon_p250"
 /**
  * @endsection
  */
@@ -82,6 +82,8 @@ enum WeaponsSlot
     Slot_Secondary      = 1,    /** Secondary weapon slot. */
     Slot_Melee          = 2,    /** Melee (knife) weapon slot. */
     Slot_Projectile     = 3,    /** Projectile (grenades, flashbangs, etc) weapon slot. */
+    Slot_FireGrenade    = 4,    /** Fire grenade slot. */
+	Slot_Decoy			= 5,	/** Decoy Slot*/
     Slot_Explosive      = 4,    /** Explosive (c4) weapon slot. */
     Slot_NVGs           = 5,    /** NVGs (fake) equipment slot. */
 }
