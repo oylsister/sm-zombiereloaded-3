@@ -761,6 +761,18 @@
 		"en"		"Explosive: {1}"
 	}
 
+	"Weapons menu zmarket loadout firenade"
+	{
+		"#format"	"{1:s}"
+		"en"		"Fire Grenade: {1}"
+	}
+
+	"Weapons menu zmarket loadout decoy"
+	{
+		"#format"	"{1:s}"
+		"en"		"Decoy Grenade: {1}"
+	}
+
 	"Weapons menu zmarket loadout nvgs"
 	{
 		"#format"	"{1:s}"
