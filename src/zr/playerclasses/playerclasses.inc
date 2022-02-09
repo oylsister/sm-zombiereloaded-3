@@ -371,12 +371,12 @@ enum ClassDataTypes
 /**
  * Structure for class filter settings passed to various functions.
  */
-enum ClassFilter
+enum struct ClassFilter
 {
-    bool:ClassFilter_IgnoreEnabled,     /** Ignore whether the class is disabled or not. */
-    ClassFilter_RequireFlags,           /** Flags the classes must have set. */
-    ClassFilter_DenyFlags,              /** Flags the classes cannot have set. */
-    ClassFilter_Client                  /** The client to check for class group permissions. Use 0 to ignore group filter and negative to exclude classes with groups set. */
+    bool ClassFilter_IgnoreEnabled;     /** Ignore whether the class is disabled or not. */
+    int ClassFilter_RequireFlags;           /** Flags the classes must have set. */
+    int ClassFilter_DenyFlags;              /** Flags the classes cannot have set. */
+    int ClassFilter_Client;                  /** The client to check for class group permissions. Use 0 to ignore group filter and negative to exclude classes with groups set. */
 }
 
 /**
@@ -402,12 +402,20 @@ enum ClassSelectResult
 /**
  * Empty filter structure.
  */
-new ClassNoFilter[ClassFilter];
+ClassFilter ClassNoFilter;
 
 /**
  * Filter structure for excluding special classes.
  */
-new ClassNoSpecialClasses[ClassFilter] = {false, 0, ZR_CLASS_SPECIALFLAGS, -1};
+ClassFilter ClassNoSpecialClasses;
+
+void DefaultClassNoSpecialClasses()
+{
+    ClassNoSpecialClasses.ClassFilter_IgnoreEnabled = false;
+    ClassNoSpecialClasses.ClassFilter_RequireFlags = 0;
+    ClassNoSpecialClasses.ClassFilter_DenyFlags = ZR_CLASS_SPECIALFLAGS;
+    ClassNoSpecialClasses.ClassFilter_Client = -1;
+}
 
 /**
  * The original class data. This array is only changed when class data is

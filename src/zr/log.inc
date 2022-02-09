@@ -440,7 +440,7 @@ LogModuleFilterCacheUpdate()
     
     // Clear all entries in module cache.
     modulecount = sizeof(LogModuleFilterCache);
-    for (new module = 1; module < modulecount; module++)
+    for (new module = 0; module < modulecount; module++)
     {
         LogModuleFilterCache[LogModules:module] = false;
     }
