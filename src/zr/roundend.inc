@@ -194,7 +194,7 @@ RoundEndOnRoundEnd(reason)
     RoundEndOverlayStart(outcome);
     
     // Balance teams if enabled.
-    if (GetConVarBool(g_hCvarsList[CVAR_ROUNDEND_BALANCE_TEAMS]))
+    if (GetConVarBool(g_hCvarsList.CVAR_ROUNDEND_BALANCE_TEAMS))
     {
         RoundEndBalanceTeams();
     }
@@ -396,7 +396,7 @@ RoundEndBalanceTeams()
 RoundEndOverlayStart(RoundEndOutcome:outcome)
 {
     // If round end overlays are disabled, then stop.
-    new bool:overlay = GetConVarBool(g_hCvarsList[CVAR_ROUNDEND_OVERLAY]);
+    new bool:overlay = GetConVarBool(g_hCvarsList.CVAR_ROUNDEND_OVERLAY);
     if (!overlay)
     {
         return;
@@ -409,12 +409,12 @@ RoundEndOverlayStart(RoundEndOutcome:outcome)
         // Show "zombies win" overlay.
         case ZombiesWin:
         {
-            GetConVarString(g_hCvarsList[CVAR_ROUNDEND_OVERLAY_ZOMBIE], overlaypath, sizeof(overlaypath));
+            GetConVarString(g_hCvarsList.CVAR_ROUNDEND_OVERLAY_ZOMBIE, overlaypath, sizeof(overlaypath));
         }
         // Show "humans win" overlay.
         case HumansWin:
         {
-            GetConVarString(g_hCvarsList[CVAR_ROUNDEND_OVERLAY_HUMAN], overlaypath, sizeof(overlaypath));
+            GetConVarString(g_hCvarsList.CVAR_ROUNDEND_OVERLAY_HUMAN, overlaypath, sizeof(overlaypath));
         }
         // Show no overlay.
         default:

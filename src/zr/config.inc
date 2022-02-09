@@ -780,11 +780,11 @@ void ConfigClearKvArray(Handle arrayKv)
  * @param file  The cvar define of the path to the file.
  * @return      True if the file exists, false if not.
  */
-stock bool ConfigGetCvarFilePath(CvarsList cvar, char[] path)
+stock bool ConfigGetCvarFilePath(ConVar cvar, char[] path)
 {
     // Get cvar's path.
     char filepath[PLATFORM_MAX_PATH];
-    GetConVarString(view_as<ConVar>(g_hCvarsList[cvar]), filepath, sizeof(filepath));
+    GetConVarString(cvar, filepath, sizeof(filepath));
     
     // Build full path in return string.
     BuildPath(Path_SM, path, PLATFORM_MAX_PATH, filepath);

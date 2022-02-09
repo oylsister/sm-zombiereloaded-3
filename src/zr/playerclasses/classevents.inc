@@ -241,7 +241,7 @@ ClassOnClientSpawn(client)
         ClassPlayerInAdminMode[client] = false;
         
         // Get random class setting.
-        new bool:randomclass = GetConVarBool(g_hCvarsList[CVAR_CLASSES_RANDOM]);
+        new bool:randomclass = GetConVarBool(g_hCvarsList.CVAR_CLASSES_RANDOM);
         
         // Assign random classes if enabled. Always do it for bots.
         if (randomclass || IsFakeClient(client))
@@ -277,8 +277,8 @@ ClassOnClientSpawn(client)
         }
         
         // Display class menu if either menu cvar is set.
-        new bool:menuspawn = GetConVarBool(g_hCvarsList[CVAR_CLASSES_MENU_SPAWN]);
-        new bool:menujoin = GetConVarBool(g_hCvarsList[CVAR_CLASSES_MENU_JOIN]);
+        new bool:menuspawn = GetConVarBool(g_hCvarsList.CVAR_CLASSES_MENU_SPAWN);
+        new bool:menujoin = GetConVarBool(g_hCvarsList.CVAR_CLASSES_MENU_JOIN);
         if (menuspawn || (menujoin && !ClassPlayerSpawned[client]))
         {
             ClassPlayerSpawned[client] = true;
@@ -292,7 +292,7 @@ ClassOnClientSpawn(client)
     // Note: Class attributes are applied in ClassOnClientSpawnPost.
     
     // Check if instant class change cvar is set.
-    new Float:instantspawn = GetConVarFloat(g_hCvarsList[CVAR_CLASSES_CHANGE_TIMELIMIT]);
+    new Float:instantspawn = GetConVarFloat(g_hCvarsList.CVAR_CLASSES_CHANGE_TIMELIMIT);
     if (instantspawn > 0)
     {
         // Allow instant class change.
@@ -371,7 +371,7 @@ ClassOnClientInfected(client, bool:motherzombie = false)
         isadmin = ZRIsClientAdmin(client) ? ZR_CLASS_FLAG_ADMIN_ONLY : 0;
         
         // Get default mother zombie setting.
-        GetConVarString(g_hCvarsList[CVAR_CLASSES_DEFAULT_M_ZOMB], motherzombiesetting, sizeof(motherzombiesetting));
+        GetConVarString(g_hCvarsList.CVAR_CLASSES_DEFAULT_M_ZOMB, motherzombiesetting, sizeof(motherzombiesetting));
         
         if (StrEqual(motherzombiesetting, "disabled", false))
         {

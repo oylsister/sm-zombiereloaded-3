@@ -185,7 +185,7 @@ ZMarketOnClientSpawnPost(client)
 ZMarketCheckRebuy(client)
 {
     // If auto-rebuy is disabled, then ensure it is also disabled on the client as well.
-    new bool:zmarketrebuyauto = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET_REBUY_AUTO]);
+    new bool:zmarketrebuyauto = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET_REBUY_AUTO);
     if (!zmarketrebuyauto)
     {
         CookiesSetClientCookieBool(client, g_hZMarketAutoRebuyCookie, false);
@@ -271,7 +271,7 @@ ZMarketGetPurchaseCount(client, const String:weapon[])
 bool:ZMarketMenuMain(client)
 {
     // If weapons module is disabled, then stop.
-    new bool:weapons = GetConVarBool(g_hCvarsList[CVAR_WEAPONS]);
+    new bool:weapons = GetConVarBool(g_hCvarsList.CVAR_WEAPONS);
     if (!weapons)
     {
         // Telle client feature is disabled.
@@ -280,7 +280,7 @@ bool:ZMarketMenuMain(client)
     }
     
     // If ZMarket module is disabled, then stop.
-    new bool:zmarket = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET]);
+    new bool:zmarket = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET);
     if (!zmarket)
     {
         // Telle client feature is disabled.
@@ -295,8 +295,8 @@ bool:ZMarketMenuMain(client)
     SetGlobalTransTarget(client);
     
     // If rebuy is enabled, then add it to the menu.
-    new bool:zmarketrebuy = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET_REBUY]);
-    new bool:zmarketrebuyauto = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET_REBUY_AUTO]);
+    new bool:zmarketrebuy = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET_REBUY);
+    new bool:zmarketrebuyauto = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET_REBUY_AUTO);
     
     // Add "Get Current Loadout" option.
     decl String:title[MENU_LINE_TITLE_LENGTH];
@@ -817,7 +817,7 @@ stock bool:ZMarketEquip(client, const String:weapon[], bool:rebuy = false)
         return false;
     }
     
-    new bool:zmarketbuyzone = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET_BUYZONE]);
+    new bool:zmarketbuyzone = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET_BUYZONE);
     if (!rebuy && zmarketbuyzone && !WeaponsIsClientInBuyZone(client))
     {
         // Update cookie with new weapon.
@@ -1146,7 +1146,7 @@ ZMarketRebuy(client, bool:autorebuy = false)
         return;
     }
     
-    new bool:zmarketbuyzone = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET_BUYZONE]);
+    new bool:zmarketbuyzone = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET_BUYZONE);
     if (!autorebuy && zmarketbuyzone && !WeaponsIsClientInBuyZone(client))
     {
         TranslationPrintToChat(client, "Weapons zmarket buyzone");
@@ -1178,7 +1178,7 @@ ZMarketRebuy(client, bool:autorebuy = false)
 ZMarketToggleAutoRebuy(client)
 {
     // If auto-rebuy is disabled, then stop.
-    new bool:zmarketrebuyauto = GetConVarBool(g_hCvarsList[CVAR_WEAPONS_ZMARKET_REBUY_AUTO]);
+    new bool:zmarketrebuyauto = GetConVarBool(g_hCvarsList.CVAR_WEAPONS_ZMARKET_REBUY_AUTO);
     if (!zmarketrebuyauto)
     {
         return;

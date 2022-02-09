@@ -168,7 +168,7 @@ WeaponsLoad()
     ConfigRegisterConfig(File_Weapons, Structure_Keyvalue, CONFIG_FILE_ALIAS_WEAPONS);
     
     // If module is disabled, then stop.
-    new bool:weapons = GetConVarBool(g_hCvarsList[CVAR_WEAPONS]);
+    new bool:weapons = GetConVarBool(g_hCvarsList.CVAR_WEAPONS);
     if (!weapons)
     {
         return;
@@ -176,7 +176,7 @@ WeaponsLoad()
     
     // Get weapons config path.
     decl String:pathweapons[PLATFORM_MAX_PATH];
-    new bool:exists = ConfigGetCvarFilePath(CVAR_CONFIG_PATH_WEAPONS, pathweapons);
+    bool exists = ConfigGetCvarFilePath(g_hCvarsList.CVAR_CONFIG_PATH_WEAPONS, pathweapons);
     
     // If file doesn't exist, then log and stop.
     if (!exists)

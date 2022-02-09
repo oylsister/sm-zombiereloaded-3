@@ -144,7 +144,7 @@ public ZRTools_Action AntiStickStartTouch(int client, int entity)
 #endif
 {
     // If antistick is disabled, then stop.
-    bool antistick = GetConVarBool(g_hCvarsList[CVAR_ANTISTICK]);
+    bool antistick = GetConVarBool(g_hCvarsList.CVAR_ANTISTICK);
     if (!antistick)
     {
         return;

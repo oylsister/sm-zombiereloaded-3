@@ -181,7 +181,7 @@ VolInit()
 VolLoad()
 {
     // Cache CVAR value.
-    VolEnabled = GetConVarBool(g_hCvarsList[CVAR_VOL]);
+    VolEnabled = GetConVarBool(g_hCvarsList.CVAR_VOL);
 }
 
 /**
@@ -279,7 +279,7 @@ bool:VolStartUpdateTimer()
     VolStopUpdateTimer();
     
     // Get update interval.
-    new Float:interval = GetConVarFloat(g_hCvarsList[CVAR_VOL_UPDATE_INTERVAL]);
+    new Float:interval = GetConVarFloat(g_hCvarsList.CVAR_VOL_UPDATE_INTERVAL);
     
     // Validate interval.
     if (interval > 0.0)
@@ -331,7 +331,7 @@ bool:VolStartTriggerTimer()
     VolStopTriggerTimer();
     
     // Get trigger interval and cache it.
-    VolTriggerInterval = GetConVarFloat(g_hCvarsList[CVAR_VOL_TRIGGER_INTERVAL]);
+    VolTriggerInterval = GetConVarFloat(g_hCvarsList.CVAR_VOL_TRIGGER_INTERVAL);
     
     // Validate interval.
     if (VolTriggerInterval > 0.0)

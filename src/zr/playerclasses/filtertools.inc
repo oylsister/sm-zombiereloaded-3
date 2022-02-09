@@ -937,9 +937,9 @@ stock bool:ClassFlagFilterMatch(index, require, deny, cachetype)
 bool:ClassAllowSelection(client, team = -1, filter[ClassFilter] = ClassNoFilter)
 {
     // Get selection settings.
-    new bool:zombie = GetConVarBool(g_hCvarsList[CVAR_CLASSES_ZOMBIE_SELECT]);
-    new bool:human = GetConVarBool(g_hCvarsList[CVAR_CLASSES_HUMAN_SELECT]);
-    new bool:admin = GetConVarBool(g_hCvarsList[CVAR_CLASSES_ADMIN_SELECT]);
+    new bool:zombie = GetConVarBool(g_hCvarsList.CVAR_CLASSES_ZOMBIE_SELECT);
+    new bool:human = GetConVarBool(g_hCvarsList.CVAR_CLASSES_HUMAN_SELECT);
+    new bool:admin = GetConVarBool(g_hCvarsList.CVAR_CLASSES_ADMIN_SELECT);
     
     // Since admin mode classes are optional they must be counted to verify
     // that they exist.
@@ -1285,15 +1285,15 @@ stock ClassGetDefaultSpawnClass(teamid, filter[ClassFilter] = ClassNoSpecialClas
     {
         case ZR_CLASS_TEAM_ZOMBIES:
         {
-            GetConVarString(g_hCvarsList[CVAR_CLASSES_DEFAULT_ZOMBIE], classname, sizeof(classname));
+            GetConVarString(g_hCvarsList.CVAR_CLASSES_DEFAULT_ZOMBIE, classname, sizeof(classname));
         }
         case ZR_CLASS_TEAM_HUMANS:
         {
-            GetConVarString(g_hCvarsList[CVAR_CLASSES_DEFAULT_HUMAN], classname, sizeof(classname));
+            GetConVarString(g_hCvarsList.CVAR_CLASSES_DEFAULT_HUMAN, classname, sizeof(classname));
         }
         case ZR_CLASS_TEAM_ADMINS:
         {
-            GetConVarString(g_hCvarsList[CVAR_CLASSES_DEFAULT_ADMIN_MODE], classname, sizeof(classname));
+            GetConVarString(g_hCvarsList.CVAR_CLASSES_DEFAULT_ADMIN_MODE, classname, sizeof(classname));
         }
         default:
         {

@@ -530,7 +530,7 @@ ClassLoad()
     
     // Get weapons config path.
     decl String:pathclasses[PLATFORM_MAX_PATH];
-    new bool:exists = ConfigGetCvarFilePath(CVAR_CONFIG_PATH_CLASSES, pathclasses);
+    bool exists = ConfigGetCvarFilePath(g_hCvarsList.CVAR_CONFIG_PATH_CLASSES, pathclasses);
     
     // If file doesn't exist, then log and stop.
     if (!exists)
@@ -710,7 +710,7 @@ ClassSpeedMethods:ClassGetSpeedMethod()
     decl String:speedMethod[16];
     speedMethod[0] = 0;
     
-    GetConVarString(g_hCvarsList[CVAR_CLASSES_SPEED_METHOD], speedMethod, sizeof(speedMethod));
+    GetConVarString(g_hCvarsList.CVAR_CLASSES_SPEED_METHOD, speedMethod, sizeof(speedMethod));
     
     if (StrEqual(speedMethod, "lmv", false))
     {
@@ -1041,7 +1041,7 @@ ClassClientSetDefaultIndexes(client = -1)
 {
     new bool:clientvalid = ZRIsClientValid(client);
     new filter[ClassFilter];
-    new bool:saveclasses = GetConVarBool(g_hCvarsList[CVAR_CLASSES_SAVE]);
+    new bool:saveclasses = GetConVarBool(g_hCvarsList.CVAR_CLASSES_SAVE);
     
     new zombieindex;
     new humanindex;
@@ -1300,7 +1300,7 @@ ClassSelectResult:ClassSelectClientClass(client, classIndex, bool:applyIfPossibl
     
     // Save selected class index in cookie if enabled.
     // Note: Saved indexes are increased by one.
-    if (saveIfEnabled && GetConVarBool(g_hCvarsList[CVAR_CLASSES_SAVE]))
+    if (saveIfEnabled && GetConVarBool(g_hCvarsList.CVAR_CLASSES_SAVE))
     {
         CookiesSetInt(client, g_hClassCookieClassSelected[teamid], classIndex + 1);
     }

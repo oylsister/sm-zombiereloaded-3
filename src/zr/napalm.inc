@@ -75,7 +75,7 @@ NapalmOnTakeDamage(client, damagetype)
     if (damagetype & DMG_CSS_BURN)
     {
         // Only take action if it isn't disabled, or the option is valid.
-        new douse = GetConVarInt(g_hCvarsList[CVAR_NAPALM_DOUSE]);
+        new douse = GetConVarInt(g_hCvarsList.CVAR_NAPALM_DOUSE);
         
         if (douse > NAPALM_WLEVEL_DRY && douse <= NAPALM_WLEVEL_FULL)
         {
@@ -150,7 +150,7 @@ NapalmOnClientHurt(client, attacker, const String:weapon[])
     // If weapon is a grenade, then ignite player.
     if (StrEqual(weapon, "hegrenade", false))
     {
-        new bool:reset = GetConVarBool(g_hCvarsList[CVAR_NAPALM_TIME_RESET]);
+        new bool:reset = GetConVarBool(g_hCvarsList.CVAR_NAPALM_TIME_RESET);
         new flags = GetEntityFlags(client);
         
         if (reset || !(flags & FL_ONFIRE))
@@ -184,7 +184,7 @@ NapalmOnClientDeath(client)
 NapalmOnWeaponFire(client, const String:weapon[])
 {
     // If grenade fire is disabled, then stop.
-    new bool:napalmignite = GetConVarBool(g_hCvarsList[CVAR_NAPALM_IGNITE]);
+    new bool:napalmignite = GetConVarBool(g_hCvarsList.CVAR_NAPALM_IGNITE);
     if (!napalmignite)
     {
         return;

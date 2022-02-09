@@ -77,7 +77,7 @@ DamageLoad()
     
     // Create command callbacks (intercepts) for listed suicide commands.
     decl String:suicidecmds[DAMAGE_SUICIDE_MAX_CMDS * DAMAGE_SUICIDE_MAX_LENGTH];
-    GetConVarString(g_hCvarsList[CVAR_DAMAGE_SUICIDE_CMDS], suicidecmds, sizeof(suicidecmds));
+    GetConVarString(g_hCvarsList.CVAR_DAMAGE_SUICIDE_CMDS, suicidecmds, sizeof(suicidecmds));
     
     // Create array to store cmds
     new String:arrayCmds[DAMAGE_SUICIDE_MAX_CMDS][DAMAGE_SUICIDE_MAX_LENGTH];
@@ -204,7 +204,7 @@ public ZRTools_Action:DamageTraceAttack(client, inflictor, attacker, Float:damag
     if (clientzombie == attackerzombie)
     {
         // If friendly fire is blocked, then allow damage.
-        new bool:damageblockff = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_BLOCK_FF]);
+        new bool:damageblockff = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_BLOCK_FF);
         if (!damageblockff)
         {
             return ACTION_CONTINUE;
@@ -231,7 +231,7 @@ public ZRTools_Action:DamageTraceAttack(client, inflictor, attacker, Float:damag
     }
     
     // If damage hitgroups cvar is disabled, then allow damage.
-    new bool:damagehitgroups = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_HITGROUPS]);
+    new bool:damagehitgroups = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_HITGROUPS);
     if (!damagehitgroups)
     {
         // Allow damage.
@@ -353,7 +353,7 @@ public ZRTools_Action:DamageOnTakeDamage(client, inflictor, attacker, Float:dama
     else if (damagetype & DMG_CSS_BLAST)
     {
         // If blast damage is blocked, then stop.
-        new bool:damageblockblast = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_BLOCK_BLAST]);
+        new bool:damageblockblast = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_BLOCK_BLAST);
         if (!damageblockblast)
         {
             return ACTION_CONTINUE;
@@ -378,7 +378,7 @@ public ZRTools_Action:DamageOnTakeDamage(client, inflictor, attacker, Float:dama
     else if (damagetype & DMG_CSS_BURN)
     {
         // If fire damage is blocked, then stop.
-        new bool:damageblockfire = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_BLOCK_FIRE]);
+        new bool:damageblockfire = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_BLOCK_FIRE);
         if (!damageblockfire)
         {
             return ACTION_CONTINUE;
@@ -427,10 +427,10 @@ public ZRTools_Action:DamageOnTakeDamage(client, inflictor, attacker, Float:dama
 public Action:DamageSuicideIntercept(client, argc)
 {
     // Get suicide interception settings.
-    new bool:suicideAfterInfect = GetConVarBool(g_hCvarsList[CVAR_SUICIDE_AFTER_INFECT]);
-    new bool:suicideZombie = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_SUICIDE_ZOMBIE]);
-    new bool:suicideZombieMother = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_SUICIDE_MZOMBIE]);
-    new bool:suicideHuman = GetConVarBool(g_hCvarsList[CVAR_DAMAGE_SUICIDE_HUMAN]);
+    new bool:suicideAfterInfect = GetConVarBool(g_hCvarsList.CVAR_SUICIDE_AFTER_INFECT);
+    new bool:suicideZombie = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_SUICIDE_ZOMBIE);
+    new bool:suicideZombieMother = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_SUICIDE_MZOMBIE);
+    new bool:suicideHuman = GetConVarBool(g_hCvarsList.CVAR_DAMAGE_SUICIDE_HUMAN);
     
     // Check various criterias that will _allow_ the command. If no criterias
     // match, block it.

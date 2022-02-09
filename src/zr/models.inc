@@ -52,7 +52,7 @@ ModelsLoad()
     
     // Get models file path.
     decl String:modelPath[PLATFORM_MAX_PATH];
-    new bool:exists = ConfigGetCvarFilePath(CVAR_CONFIG_PATH_MODELS, modelPath);
+    bool exists = ConfigGetCvarFilePath(g_hCvarsList.CVAR_CONFIG_PATH_MODELS, modelPath);
     
     // If file doesn't exist, then log and stop.
     if (!exists)

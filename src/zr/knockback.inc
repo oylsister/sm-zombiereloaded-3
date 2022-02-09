@@ -100,7 +100,7 @@ KnockbackOnClientHurt(client, attacker, const String:weapon[], hitgroup, dmg_hea
         TR_GetEndPosition(clientloc);
     }
     
-    new bool:weapons = GetConVarBool(g_hCvarsList[CVAR_WEAPONS]);
+    new bool:weapons = GetConVarBool(g_hCvarsList.CVAR_WEAPONS);
     if (weapons)
     {
         new weaponindex = WeaponsNameToIndex(weapon);
@@ -111,7 +111,7 @@ KnockbackOnClientHurt(client, attacker, const String:weapon[], hitgroup, dmg_hea
         }
     }
     
-    new bool:hitgroups = GetConVarBool(g_hCvarsList[CVAR_HITGROUPS]);
+    new bool:hitgroups = GetConVarBool(g_hCvarsList.CVAR_HITGROUPS);
     if (hitgroups)
     {
         new hitgroupindex = HitgroupToIndex(hitgroup);
@@ -153,7 +153,7 @@ KnockbackSetVelocity(client, const Float:startpoint[3], const Float:endpoint[3],
     ScaleVector(vector, magnitude);
     
     // CS: GO workaround. Apply knock back boost if enabled.
-    if (g_Game == Game_CSGO && GetConVarBool(g_hCvarsList[CVAR_CLASSES_CSGO_KNOCKBACK_BOOST]))
+    if (g_Game == Game_CSGO && GetConVarBool(g_hCvarsList.CVAR_CLASSES_CSGO_KNOCKBACK_BOOST))
     {
         new flags = GetEntityFlags(client);
         new Float:velocity[3];
